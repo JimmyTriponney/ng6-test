@@ -1,0 +1,53 @@
+<section class="row">
+    <div class="col-12">
+        <div class="row">
+            <div class="col-12">
+                <div class="search-group">
+                <input type="text" name="search" autofocus (keyup)="onKeyup()" [(ngModel)]="search" class="search-input"/>
+                <div class="search-icon" (click)="onClick()()">
+                    <i class="fas fa-search"></i>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="row" *ngFor="let concession of concessions" [hidden]="concession.isHide">
+
+    <div class="card-short-info">
+
+        <!-- Information de contact d'une concession -->
+        <div class="col-8">
+            <div class="row">
+                <div class="col-12 card-short-title">
+                    <a routerLink="/tool/admin/concession/{{ concession.id }}">{{ concession.city }} - {{ concession.brand }}</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 card-short-subtitle">
+                    {{ concession.entity }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 card-short-contact">
+                    {{ concession.phone }} - {{ concession.phoneInside }}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-3 card-short-action">
+
+            <div class="btn-action">
+                    <i class="fas fa-pencil-alt"></i>
+            </div>
+
+            <div class="btn-action">
+                    <i class="far fa-trash-alt"></i>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

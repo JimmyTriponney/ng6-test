@@ -1,0 +1,106 @@
+<form [formGroup]="concessionForm" (ngSubmit)="onSubmitForm()" class="row">
+
+    <div class="form-group col-12">
+      <h2>Marques</h2>
+      <div class="group-btn-check row">
+
+        <input type="hidden" formControlName="brand"/>
+
+        <div class="btn btn-check-for-select col-auto ml-auto mr-1" 
+        [ngClass]="{'btn-secondary': brand.indexOf('Audi') === -1, 'btn-primary': brand.indexOf('Audi') > -1}" 
+        (click)="onCheckBoxClick(brand,'Audi')">Audi</div>
+
+        <div class="btn btn-check-for-select col-auto mx-1" 
+        [ngClass]="{'btn-secondary': brand.indexOf('Mazda') === -1, 'btn-primary': brand.indexOf('Mazda') > -1}" 
+        (click)="onCheckBoxClick(brand,'Mazda')">Mazda</div>
+
+        <div class="btn btn-check-for-select col-auto mx-1" 
+        [ngClass]="{'btn-secondary': brand.indexOf('Nissan') === -1, 'btn-primary': brand.indexOf('Nissan') > -1}" 
+        (click)="onCheckBoxClick(brand,'Nissan')">Nissan</div>
+
+        <div class="btn btn-check-for-select col-auto mx-1" 
+        [ngClass]="{'btn-secondary': brand.indexOf('Seat') === -1, 'btn-primary': brand.indexOf('Seat') > -1}" 
+        (click)="onCheckBoxClick(brand,'Seat')">Seat</div>
+
+        <div class="btn btn-check-for-select col-auto mx-1" 
+        [ngClass]="{'btn-secondary': brand.indexOf('Skoda') === -1, 'btn-primary': brand.indexOf('Skoda') > -1}" 
+        (click)="onCheckBoxClick(brand,'Skoda')">Skoda</div>
+
+        
+        <div class="btn btn-check-for-select col-auto mx-1" 
+        [ngClass]="{'btn-secondary': brand.indexOf('Suzuki') === -1, 'btn-primary': brand.indexOf('Suzuki') > -1}" 
+        (click)="onCheckBoxClick(brand,'Suzuki')">Suzuki</div>
+
+        <div class="btn btn-check-for-select col-auto ml-1 mr-auto" 
+        [ngClass]="{'btn-secondary': brand.indexOf('Volkswagen') === -1, 'btn-primary': brand.indexOf('Volkswagen') > -1}" 
+        (click)="onCheckBoxClick(brand,'Volkswagen')">Volkswagen</div>
+    
+      </div>
+    </div>
+    
+
+    <div class="form-group col-12">
+      <h2>Entités</h2>
+      <div class="group-btn-check row">
+
+        <input type="hidden" formControlName="entity"/>
+
+        <div class="btn btn-check-for-select col-auto ml-auto mr-1" 
+        [ngClass]="{'btn-secondary': entity.indexOf('AMSI') === -1, 'btn-primary': entity.indexOf('AMSI') > -1}" 
+        (click)="onCheckBoxClick(entity,'AMSI')">AMSI</div>
+
+        <div class="btn btn-check-for-select col-auto mx-1" 
+        [ngClass]="{'btn-secondary': entity.indexOf('Jeannin Automobiles') === -1, 'btn-primary': entity.indexOf('Jeannin Automobiles') > -1}" 
+        (click)="onCheckBoxClick(entity,'Jeannin Automobiles')">Jeannin Automobiles</div>
+
+        <div class="btn btn-check-for-select col-auto mx-1" 
+        [ngClass]="{'btn-secondary': entity.indexOf('Jeannin Autoprestige') === -1, 'btn-primary': entity.indexOf('Jeannin Autoprestige') > -1}" 
+        (click)="onCheckBoxClick(entity,'Jeannin Autoprestige')">Jeannin Autoprestige</div>
+
+        <div class="btn btn-check-for-select col-auto mx-1" 
+        [ngClass]="{'btn-secondary': entity.indexOf('Jeannin Advanced Car') === -1, 'btn-primary': entity.indexOf('Jeannin Advanced Car') > -1}" 
+        (click)="onCheckBoxClick(entity,'Jeannin Advanced Car')">Jeannin Advanced Car</div>
+
+        <div class="btn btn-check-for-select col-auto mr-auto ml-1" 
+        [ngClass]="{'btn-secondary': entity.indexOf('Jeannin New Car') === -1, 'btn-primary': entity.indexOf('Jeannin New Car') > -1}" 
+        (click)="onCheckBoxClick(entity,'Jeannin New Car')">Jeannin New Car</div>
+        
+      </div>
+    </div>
+
+    <div class="col-12">
+      <h2>Adresse</h2>
+    </div>
+
+    <div class="form-group col-7">
+      <input type="text" class="form-control" placeholder="Adresse" formControlName="adress">
+    </div>
+
+    <div class="form-group col-3">
+      <input type="text" class="form-control" placeholder="Ville" formControlName="city">
+    </div>
+    
+    <div class="form-group col-2">
+      <input type="text" class="form-control" placeholder="Code postal" formControlName="zip">
+    </div>
+    
+    <div class="col-12">
+      <h2>Contact</h2>
+    </div>
+
+    <div class="form-group col-4 ml-auto">
+      <input type="text" placeholder="Téléphone" class="form-control" formControlName="phone">
+    </div>
+
+    
+    <div class="form-group col-2 mr-auto">
+      <input type="text" placeholder="Numéro interne" class="form-control" formControlName="phoneInside">
+    </div>
+    
+    <div class="col-12 my-5">
+      <div class="row">
+        <button type="submit" class="btn btn-primary col-4 m-auto" [disabled]="!formIsValid">Enregistrer</button>
+      </div>
+    </div>
+    
+  </form>

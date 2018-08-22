@@ -1,0 +1,21 @@
+<!-- Section -->
+<section class="menu-section row">
+    <!-- Titre de section -->
+    <div class="menu-section-header" (click)="onClick()">
+      <h2>Outil Administrateur</h2>
+      <i class="fas fa-chevron-right" [@menuChevronAnim]="state"></i>
+      <span class="menu-section-stripe"></span>
+    </div>
+
+    <!-- Contenu de la section-->
+    <div class="menu-section-content row" [@menuSectionAnim]="state">
+      
+      <app-menu-item class="col-3" *ngFor="let item of items"
+        [classIcon]="item.classIcon"
+        [name]="item.name"
+        [link]="item.link"
+        (stateMenu)="onClickItem($event)"></app-menu-item>
+
+    </div>
+
+</section>

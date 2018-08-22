@@ -1,0 +1,22 @@
+<nav class="row nav-container">
+  <div class="title-page">
+    <h1>{{ title }}</h1>
+  </div>
+  <!-- Burger menu -->
+  <button class="menu-burger" (click)="onClick()">
+    <div class="menu-burger-stripe" [@stripeNoAnim]="state"></div>
+    <div class="menu-burger-stripe cross-top" [@crossTop]="state"></div>
+    <div class="menu-burger-stripe cross-bottom" [@crossBottom]="state"></div>
+    <div class="menu-burger-stripe" [@stripeNoAnim]="state"></div>
+  </button>
+
+  <!-- Contenu du menu -->
+  <main class="menu-container col-12" [@menuAnim]="state">
+    <app-menu-section *ngFor="let menu of menus"
+      [state]="menu.state"
+      [items]="menu.items"
+      [id]="menu.id"
+      (stateMenu)="onClickItem($event)"></app-menu-section>
+  </main>
+
+</nav>
