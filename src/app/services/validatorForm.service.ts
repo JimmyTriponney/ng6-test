@@ -26,6 +26,9 @@ export class ValidatorForm
 
         /* Récupération des valeurs du formulaire */
         const value = form.value;
+        //console.log(form);
+        //console.log(value);
+        //console.log('test',!value['adress'] );
 
         /* Test des valeurs du formulaire avec les contraintes passées dans le tableau */
         for (const v of data) {

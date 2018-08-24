@@ -1,0 +1,54 @@
+<section class="row">
+  <div class="col-12">
+      <div class="row">
+          <div class="col-12">
+              <div class="search-group">
+              <input type="text" name="search" autofocus (keyup)="onKeyup()" [(ngModel)]="search" class="search-input"/>
+              <div class="search-icon" (click)="onClick()()">
+                  <i class="fas fa-search"></i>
+              </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+{{ search }}
+<section class="row" *ngFor="let user of users" [hidden]="user.isHide">
+
+  <div class="card-short-info">
+
+      <!-- Information de contact d'une user -->
+      <div class="col-8">
+          <div class="row">
+              <div class="col-12 card-short-title">
+                  <a routerLink="/tool/admin/user/{{ user.id }}">{{ user.firstname }} {{ user.lastname }}</a>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-12 card-short-subtitle">
+                  {{ user.entity }}<br>
+                  {{ user.post }}
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-12 card-short-contact">
+                  {{ user.mail }} - {{ user.mobile }} - {{ user.phoneInside }}
+              </div>
+          </div>
+      </div>
+
+      <div class="col-3 card-short-action">
+
+          <div class="btn-action">
+                  <i class="fas fa-pencil-alt"></i>
+          </div>
+
+          <div class="btn-action">
+                  <i class="far fa-trash-alt"></i>
+          </div>
+
+      </div>
+
+  </div>
+
+</section>

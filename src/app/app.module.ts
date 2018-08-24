@@ -14,14 +14,21 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConcessionService } from './services/concession.service';
 import { AddConcessionComponent } from './tool-admin/admin-concessions/add-concession/add-concession.component';
 import { ValidatorForm } from './services/validatorForm.service';
+import { UserService } from './services/user.service';
+import { AdminUsersComponent } from './tool-admin/admin-users/admin-users.component';
+import { AddUserComponent } from './tool-admin/admin-users/add-user/add-user.component';
+import { ViewUserComponent } from './tool-admin/admin-users/view-user/view-user.component';
+import { SearchService } from './services/search.service';
 
 
 const appRoute: Routes = [
-  { path: "", component: AppComponent},
-  { path: "tool/admin/concession", component: AdminConcessionsComponent},
-  { path: "tool/admin/concession/add", component: AddConcessionComponent},
-  { path: "tool/admin/concession/edit/:id", component: AddConcessionComponent},
-  { path: "tool/admin/concession/:id", component: ViewConcessionComponent},
+  { path: '', component: AppComponent},
+  { path: 'tool/admin/concession', component: AdminConcessionsComponent},
+  { path: 'tool/admin/user', component: AdminUsersComponent},
+  { path: 'tool/admin/concession/add', component: AddConcessionComponent},
+  { path: 'tool/admin/user/add', component: AddUserComponent},
+  { path: 'tool/admin/concession/edit/:id', component: AddConcessionComponent},
+  { path: 'tool/admin/concession/:id', component: ViewConcessionComponent},
 ];
 
 @NgModule({
@@ -32,7 +39,10 @@ const appRoute: Routes = [
     MenuItemComponent,
     AdminConcessionsComponent,
     ViewConcessionComponent,
-    AddConcessionComponent
+    AddConcessionComponent,
+    AdminUsersComponent,
+    AddUserComponent,
+    ViewUserComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +54,9 @@ const appRoute: Routes = [
   providers: [
     MenuService,
     ConcessionService,
-    ValidatorForm
+    ValidatorForm,
+    UserService,
+    SearchService
   ],
   bootstrap: [AppComponent]
 })

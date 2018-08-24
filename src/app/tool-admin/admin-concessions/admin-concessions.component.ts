@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Concession } from '../../models/concession.model';
 import { Subscription } from 'rxjs';
 import { ConcessionService } from '../../services/concession.service';
+import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'app-admin-concessions',
@@ -17,46 +18,22 @@ export class AdminConcessionsComponent implements OnInit, OnDestroy {
 
   concessionSubscription: Subscription;
 
-  constructor(private concessionService: ConcessionService) { }
+  constructor(private concessionService: ConcessionService
+              private searchService: SearchService) { }
 
   ngOnInit() {
     this.concessionSubscription = this.concessionService.concessionSubject.subscribe( concession => this.concessions = concession );
     this.concessionService.emitConcession();
   }
 
-  onKeyup(): void{
-    this.onSearch();
+  onKeyup() {
+    this.searchService.onSearch(this.concessions, this.search);
   }
 
-  onClick(): void{
-    this.onSearch();
+  onClick() {
+    this.searchService.onSearch(this.concessions, this.search);
   }
-
-  onSearch(): void{
-    this.concessions.map( concession => {
-      if(this.search.length > 0){
-        for(let info in concession){
-          if(typeof concession[info] === 'string' && concession[info] === this.search ){
-            concession.isHide = true;
-            this.countSearch += 1;
-          }
-        }
-      }
-      else{
-        concession.isHide = false;
-      }
-    });
-
-    if(this.countSearch){
-      this.concessions.map( c => { c.isHide = !c.isHide; });
-    }
-    else{
-      this.concessions.map( c => { c.isHide = false; });
-    }
-
-    this.countSearch = 0;
-  }
-
+  
   ngOnDestroy(){
     this.concessionSubscription.unsubscribe();
   }

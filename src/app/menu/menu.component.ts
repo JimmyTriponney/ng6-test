@@ -24,12 +24,12 @@ import { RouterState } from '@angular/router';
           transform: 'scale(0)',
           display: 'none'
         })),
-      transition( 'show => hide', animate(500, 
+      transition( 'show => hide', animate(250, 
         keyframes([
           style({height: 0, transform: 'scale(0)', offset: 0.9}),
           style({display: 'none', offset: 1})
         ]))),
-      transition( 'hide => show', animate(500, 
+      transition( 'hide => show', animate(250, 
         keyframes([
           style({display: '*', offset: 0.1}),
           style({height: '*', transform: 'scale(1)', offset: 1})
@@ -44,7 +44,7 @@ import { RouterState } from '@angular/router';
         style({
           transform: 'rotate(0)'
         })),
-      transition('hide <=> show', animate(500))
+      transition('hide <=> show', animate(100))
     ]),
     trigger('crossTop',[
       state('show',
@@ -55,7 +55,7 @@ import { RouterState } from '@angular/router';
         style({
           transform: 'rotate(0)'
         })),
-      transition('hide <=> show', animate(500))
+      transition('hide <=> show', animate(100))
     ]),
     trigger('stripeNoAnim',[
       state('hide',
@@ -66,8 +66,8 @@ import { RouterState } from '@angular/router';
         style({
           opacity: 0
         })),
-      transition('hide => show', animate(100)),
-      transition('show => hide', animate('400ms 100ms'))
+      transition('hide => show', animate(50)),
+      transition('show => hide', animate('50ms 50ms'))
     ]),
     trigger('circleCross',[
       state('show',
@@ -78,7 +78,7 @@ import { RouterState } from '@angular/router';
         style({
           'borderRadius': '40px'
         })),
-      transition('show <=> hide', animate(500))
+      transition('show <=> hide', animate(100))
     ])
   ]
 })

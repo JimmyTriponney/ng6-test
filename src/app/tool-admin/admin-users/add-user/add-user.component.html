@@ -1,0 +1,228 @@
+<form [formGroup]="userForm" (ngSubmit)="onSubmitForm()" class="row">
+
+  <div class="form-group col-12">
+    <h2>Utilisateur</h2>
+
+    <div class="row">
+        <div class="col-6 p-1">
+          <input type="text" placeholder="Prénom" class="form-control w-100 p-2" formControlName="firstname" />
+        </div>
+
+        <div class="col-6 p-1">
+          <input type="text" placeholder="Nom" class="form-control w-100 p-2" formControlName="lastname" />
+        </div>
+
+        <div class="col-6 p-1">
+          <input type="text" placeholder="Mail" class="form-control w-100 p-2" formControlName="mail" />
+        </div>
+
+        <div class="col-4 p-1">
+          <input type="text" placeholder="Téléphone portable" class="form-control w-100 p-2" formControlName="mobile" />
+        </div>
+
+        <div class="col-2 p-1">
+          <input type="text" placeholder="Numéro interne" class="form-control w-100 p-2" formControlName="phoneInside" />
+        </div>
+
+        <div class="col-12 p-1">
+          <select class="form-control w-100 p-2" formControlName="post">
+            <option value="" hidden disabled>Poste</option>
+            <option value="Web developper" [hidden]="userForm.value['post'] === 'Web developper'">Web developper</option>
+            <option value="Responsable marketing" [hidden]="userForm.value['post'] === 'Responsable marketing'">Responsable marketing</option>
+            <option value="Chef des ventes" [hidden]="userForm.value['post'] === 'Chef des ventes'">Chef des ventes</option>
+          </select>
+        </div>
+    
+    </div>
+
+  </div>
+
+  <div class="form-group col-6">
+    <h2>Entité</h2>
+
+    <div formArrayName="entity" class="row">
+      <div class="col-12">
+        <div class="row py-3">
+          <div *ngFor=" let entityControl of getEntity().controls; let i = index " class="col-10 m-auto pb-3">
+            <select [formControlName]="i" class="w-100 p-2 form-control">
+              <option value="" hidden disabled>Sélectionné une entité</option>
+              <option value="AMSI" [hidden]="userForm.value['entity'].indexOf('AMSI') >= 0">AMSI</option>
+              <option value="Jeannin Automobiles" [hidden]="userForm.value['entity'].indexOf('Jeannin Automobiles') >= 0">Jeannin Automobiles</option>
+              <option value="Jeannin Autoprestige" [hidden]="userForm.value['entity'].indexOf('Jeannin Autoprestige') >= 0">Jeannin Autoprestige</option>
+            </select>
+            <div class="btn-delete-dyn-form" (click)="onDeleteEntity(i)">
+                <i class="far fa-trash-alt"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <button type="button" class="btn btn-success col-6 m-auto" (click)="onAddEntity()">Ajouter une entité</button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="form-group col-6">
+      <h2>Marque</h2>
+  
+      <div formArrayName="brand" class="row">
+        <div class="col-12">
+          <div class="row py-3">
+            <div *ngFor=" let brandControl of getBrand().controls; let i = index " class="col-10 m-auto pb-3">
+              <select [formControlName]="i" class="w-80 p-2 form-control">
+                <option value="" hidden disabled>Sélectionné une marque</option>
+                <option value="Audi" [hidden]="userForm.value['brand'].indexOf('Audi') >= 0">Audi</option>
+                <option value="Skoda" [hidden]="userForm.value['brand'].indexOf('Skoda') >= 0">Skoda</option>
+                <option value="Volkswagen" [hidden]="userForm.value['brand'].indexOf('Volkswagen') >= 0">Volkswagen</option>
+              </select>
+              <div class="btn-delete-dyn-form" (click)="onDeleteBrand(i)">
+                  <i class="far fa-trash-alt"></i>
+              </div>
+            </div>
+          </div>
+  
+          <div class="row">
+            <button type="button" class="btn btn-success col-6 m-auto" (click)="onAddBrand()">Ajouter une marque</button>
+          </div>
+        </div>
+  
+      </div>
+  
+    </div>
+
+
+    <div class="form-group col-12">
+        <h2>Concession</h2>
+    
+        <div formArrayName="shop" class="row">
+          <div class="col-12">
+            <div class="row py-3">
+              <div *ngFor=" let shopControl of getShop().controls; let i = index " class="col-10 m-auto pb-3">
+                <select [formControlName]="i" class="w-100 p-2 form-control">
+                  <option value="" hidden disabled>Sélectionné une marque</option>
+                  <option *ngFor="let s of shop" value="s.brand" [hidden]="userForm.value['shop'].indexOf(s.brand) >= 0">{{ s.brand }}</option>
+                </select>
+                <div class="btn-delete-dyn-form" (click)="onDeleteShop(i)">
+                    <i class="far fa-trash-alt"></i>
+                </div>
+              </div>
+            </div>
+    
+            <div class="row">
+              <button type="button" class="btn btn-success col-6 m-auto" (click)="onAddShop()">Ajouter une marque</button>
+            </div>
+          </div>
+    
+        </div>
+    
+      </div>
+  
+
+  <!--<div class="form-group col-12">
+    <h2>Marques</h2>
+    <div class="group-btn-check row">
+
+      <input type="hidden" formControlName="brand"/>
+
+      <div class="btn btn-check-for-select col-auto ml-auto mr-1" 
+      [ngClass]="{'btn-secondary': brand.indexOf('Audi') === -1, 'btn-primary': brand.indexOf('Audi') > -1}" 
+      (click)="onCheckBoxClick(brand,'Audi')">Audi</div>
+
+      <div class="btn btn-check-for-select col-auto mx-1" 
+      [ngClass]="{'btn-secondary': brand.indexOf('Mazda') === -1, 'btn-primary': brand.indexOf('Mazda') > -1}" 
+      (click)="onCheckBoxClick(brand,'Mazda')">Mazda</div>
+
+      <div class="btn btn-check-for-select col-auto mx-1" 
+      [ngClass]="{'btn-secondary': brand.indexOf('Nissan') === -1, 'btn-primary': brand.indexOf('Nissan') > -1}" 
+      (click)="onCheckBoxClick(brand,'Nissan')">Nissan</div>
+
+      <div class="btn btn-check-for-select col-auto mx-1" 
+      [ngClass]="{'btn-secondary': brand.indexOf('Seat') === -1, 'btn-primary': brand.indexOf('Seat') > -1}" 
+      (click)="onCheckBoxClick(brand,'Seat')">Seat</div>
+
+      <div class="btn btn-check-for-select col-auto mx-1" 
+      [ngClass]="{'btn-secondary': brand.indexOf('Skoda') === -1, 'btn-primary': brand.indexOf('Skoda') > -1}" 
+      (click)="onCheckBoxClick(brand,'Skoda')">Skoda</div>
+
+      
+      <div class="btn btn-check-for-select col-auto mx-1" 
+      [ngClass]="{'btn-secondary': brand.indexOf('Suzuki') === -1, 'btn-primary': brand.indexOf('Suzuki') > -1}" 
+      (click)="onCheckBoxClick(brand,'Suzuki')">Suzuki</div>
+
+      <div class="btn btn-check-for-select col-auto ml-1 mr-auto" 
+      [ngClass]="{'btn-secondary': brand.indexOf('Volkswagen') === -1, 'btn-primary': brand.indexOf('Volkswagen') > -1}" 
+      (click)="onCheckBoxClick(brand,'Volkswagen')">Volkswagen</div>
+  
+    </div>
+  </div>
+  
+
+  <div class="form-group col-12">
+    <h2>Entités</h2>
+    <div class="group-btn-check row">
+
+      <input type="hidden" formControlName="entity"/>
+
+      <div class="btn btn-check-for-select col-auto ml-auto mr-1" 
+      [ngClass]="{'btn-secondary': entity.indexOf('AMSI') === -1, 'btn-primary': entity.indexOf('AMSI') > -1}" 
+      (click)="onCheckBoxClick(entity,'AMSI')">AMSI</div>
+
+      <div class="btn btn-check-for-select col-auto mx-1" 
+      [ngClass]="{'btn-secondary': entity.indexOf('Jeannin Automobiles') === -1, 'btn-primary': entity.indexOf('Jeannin Automobiles') > -1}" 
+      (click)="onCheckBoxClick(entity,'Jeannin Automobiles')">Jeannin Automobiles</div>
+
+      <div class="btn btn-check-for-select col-auto mx-1" 
+      [ngClass]="{'btn-secondary': entity.indexOf('Jeannin Autoprestige') === -1, 'btn-primary': entity.indexOf('Jeannin Autoprestige') > -1}" 
+      (click)="onCheckBoxClick(entity,'Jeannin Autoprestige')">Jeannin Autoprestige</div>
+
+      <div class="btn btn-check-for-select col-auto mx-1" 
+      [ngClass]="{'btn-secondary': entity.indexOf('Jeannin Advanced Car') === -1, 'btn-primary': entity.indexOf('Jeannin Advanced Car') > -1}" 
+      (click)="onCheckBoxClick(entity,'Jeannin Advanced Car')">Jeannin Advanced Car</div>
+
+      <div class="btn btn-check-for-select col-auto mr-auto ml-1" 
+      [ngClass]="{'btn-secondary': entity.indexOf('Jeannin New Car') === -1, 'btn-primary': entity.indexOf('Jeannin New Car') > -1}" 
+      (click)="onCheckBoxClick(entity,'Jeannin New Car')">Jeannin New Car</div>
+      
+    </div>
+  </div>
+
+  <div class="col-12">
+    <h2>Adresse</h2>
+  </div>
+
+  <div class="form-group col-7">
+    <input type="text" class="form-control" placeholder="Adresse" formControlName="adress">
+  </div>
+
+  <div class="form-group col-3">
+    <input type="text" class="form-control" placeholder="Ville" formControlName="city">
+  </div>
+  
+  <div class="form-group col-2">
+    <input type="text" class="form-control" placeholder="Code postal" formControlName="zip">
+  </div>
+  
+  <div class="col-12">
+    <h2>Contact</h2>
+  </div>
+
+  <div class="form-group col-4 ml-auto">
+    <input type="text" placeholder="Téléphone" class="form-control" formControlName="phone">
+  </div>
+
+  
+  <div class="form-group col-2 mr-auto">
+    <input type="text" placeholder="Numéro interne" class="form-control" formControlName="phoneInside">
+  </div>
+  
+  <div class="col-12 my-5">
+    <div class="row">
+      <button type="submit" class="btn btn-primary col-4 m-auto" [disabled]="concessionForm.invalid || !formIsValid">Enregistrer</button>
+    </div>
+  </div>-->
+  
+</form>

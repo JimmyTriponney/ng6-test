@@ -19,8 +19,7 @@ export class AddConcessionComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private concessionService: ConcessionService,
-              private route: Router,
-              private validate: ValidatorForm) { }
+              private route: Router) { }
 
   ngOnInit() {
     this.initForm();
@@ -30,20 +29,18 @@ export class AddConcessionComponent implements OnInit {
     this.concessionForm = this.formBuilder.group({
       brand: [''],
       entity: [''],
-      city: [''],
-      adress: [''],
-      zip: [''],
-      phone: [''],
+      city: ['', [Validators.required] ],
+      adress: ['', [Validators.required]],
+      zip: ['', [Validators.required]],
+      phone: ['', [Validators.required]],
       phoneInside: ['']
     });
   }
 
   onSubmitForm(){
     const value = this.concessionForm.value;
-    console.log( value['brand'] );
-    console.log( this.concessionForm.invalid );
-    console.log( this.concessionForm.controls.brand.errors );
-    /*let concession = new Concession({
+    this.hydrateForm();
+    let concession = new Concession({
       id: this.concessionService.genId(),
       brand: value['brand'],
       city: value['city'],
@@ -55,7 +52,7 @@ export class AddConcessionComponent implements OnInit {
     });
     this.concessionService.addConcession(concession);
     this.concessionService.emitConcession();
-    this.route.navigate(['tool/admin/concession']);*/
+    this.route.navigate(['tool/admin/concession']);
   }
 
   onCheckBoxClick(prop, value){
@@ -74,25 +71,19 @@ export class AddConcessionComponent implements OnInit {
     value['entity'] = this.entity;
   }
 
-  /* TEST DE CREATION D'UNE FONCTION DE VALIDATION */
-  dataV: any[] = [
-    ['entity','required'],
-    ['brand', ['required']],
-    ['adress', 'required']
-  ];
-
   get formIsValid(){
     this.hydrateForm();
 
-    /* Test du service de validation maison */
-    let test = this.validate.check(this.concessionForm, this.dataV);
-    this.formError = this.validate.messageOut ;
-    console.log(this.formError);
-    console.log(this.validate.messageOut);
-    return test;
+    const value = this.concessionForm.value;
+    
+    if (!value['brand'].length) {
+      return false;
+    }
+    if (!value['entity'].length) {
+      return false;
+    }
+
+    return true;
   }
 
-  hasOwnProperty(obj, prop){
-    return this.formError.hasOwnProperty(prop);
-  }
 }

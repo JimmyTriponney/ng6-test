@@ -99,7 +99,7 @@
     
     <div class="col-12 my-5">
       <div class="row">
-        <button type="submit" class="btn btn-primary col-4 m-auto" [disabled]="!formIsValid">Enregistrer</button>
+        <button type="submit" class="btn btn-primary col-4 m-auto" [disabled]="concessionForm.invalid || !formIsValid">Enregistrer</button>
       </div>
     </div>
     

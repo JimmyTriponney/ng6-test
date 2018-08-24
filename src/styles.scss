@@ -227,3 +227,45 @@ $bg-color : rgb(44, 43, 53);
         transform: scale(1.5);
     }
 }
+
+
+
+
+
+
+
+
+
+/***************************************************
+
+
+        FORMULAIRE
+
+
+*****************************************************/
+.btn-delete-dyn-form {
+    position: absolute;
+    right: -30px;
+    top: 0;
+    border: 1px #fff solid;
+    border-radius: 20px;
+    padding: 5px 10px;
+}
+
+input.form-control,
+select.form-control,
+input.form-control:focus,
+select.form-control:focus,
+input.form-control::placeholder,
+select.form-control::placeholder
+{
+    background: transparent;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    outline:  none;
+    color: white;
+}
+select.form-control option{
+    color: #000;
+}
