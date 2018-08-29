@@ -105,7 +105,7 @@ export class AddUserComponent implements OnInit, OnDestroy {
   }
 
   hydrateForm(){
-    let value = this.concessionForm.value;
+    let value = this.userForm.value;
     value['brand'] = this.brand;
     value['entity'] = this.entity;
   }
@@ -113,7 +113,7 @@ export class AddUserComponent implements OnInit, OnDestroy {
   get formIsValid(){
     this.hydrateForm();
 
-    const value = this.concessionForm.value;
+    const value = this.userForm.value;
     
     if (!value['brand'].length) {
       return false;

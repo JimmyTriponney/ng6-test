@@ -46,8 +46,8 @@ export class UserService
     }
 
     genId() {
-        let lgh = this.concession.length;
-        if(!this.concession.length) { return 0; }
-        return this.concession[--lgh].id + 1;
+        let lgh = this.user.length;
+        if(!this.user.length) { return 0; }
+        return this.user[--lgh].id + 1;
     }
 }

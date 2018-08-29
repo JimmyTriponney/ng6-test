@@ -18,7 +18,7 @@ export class AdminConcessionsComponent implements OnInit, OnDestroy {
 
   concessionSubscription: Subscription;
 
-  constructor(private concessionService: ConcessionService
+  constructor(private concessionService: ConcessionService,
               private searchService: SearchService) { }
 
   ngOnInit() {
@@ -33,7 +33,7 @@ export class AdminConcessionsComponent implements OnInit, OnDestroy {
   onClick() {
     this.searchService.onSearch(this.concessions, this.search);
   }
-  
+
   ngOnDestroy(){
     this.concessionSubscription.unsubscribe();
   }

@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
@@ -19,14 +20,21 @@ import { AdminUsersComponent } from './tool-admin/admin-users/admin-users.compon
 import { AddUserComponent } from './tool-admin/admin-users/add-user/add-user.component';
 import { ViewUserComponent } from './tool-admin/admin-users/view-user/view-user.component';
 import { SearchService } from './services/search.service';
+import { LoaderDirective } from './loader.directive';
+import { AdminBrandComponent } from './tool-admin/admin-brand/admin-brand.component';
+import { BrandService } from './services/brand.service';
+import { AddBrandComponent } from './tool-admin/admin-brand/add-brand/add-brand.component';
 
 
 const appRoute: Routes = [
   { path: '', component: AppComponent},
+  { path: 'test', component: AppComponent},
   { path: 'tool/admin/concession', component: AdminConcessionsComponent},
   { path: 'tool/admin/user', component: AdminUsersComponent},
+  { path: 'tool/admin/brand', component: AdminBrandComponent},
   { path: 'tool/admin/concession/add', component: AddConcessionComponent},
   { path: 'tool/admin/user/add', component: AddUserComponent},
+  { path: 'tool/admin/brand/add', component: AddBrandComponent},
   { path: 'tool/admin/concession/edit/:id', component: AddConcessionComponent},
   { path: 'tool/admin/concession/:id', component: ViewConcessionComponent},
 ];
@@ -42,11 +50,15 @@ const appRoute: Routes = [
     AddConcessionComponent,
     AdminUsersComponent,
     AddUserComponent,
-    ViewUserComponent
+    ViewUserComponent,
+    LoaderDirective,
+    AdminBrandComponent,
+    AddBrandComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     RouterModule.forRoot(appRoute),
     ReactiveFormsModule,
     FormsModule
@@ -56,6 +68,7 @@ const appRoute: Routes = [
     ConcessionService,
     ValidatorForm,
     UserService,
+    BrandService,
     SearchService
   ],
   bootstrap: [AppComponent]

@@ -55,12 +55,12 @@ export class AddConcessionComponent implements OnInit {
     this.route.navigate(['tool/admin/concession']);
   }
 
-  onCheckBoxClick(prop, value){
+  onCheckBoxClick(prop, value) {
     let index = prop.indexOf(value);
-    if (index > -1){
-      prop.splice(index,1);
+    if (index > -1) {
+      prop.splice(index, 1);
     }
-    else{
+    else {
       prop.push(value);
     }
   }
@@ -71,11 +71,11 @@ export class AddConcessionComponent implements OnInit {
     value['entity'] = this.entity;
   }
 
-  get formIsValid(){
+  get formIsValid() {
     this.hydrateForm();
 
     const value = this.concessionForm.value;
-    
+
     if (!value['brand'].length) {
       return false;
     }
