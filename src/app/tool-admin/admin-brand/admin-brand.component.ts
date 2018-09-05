@@ -31,6 +31,10 @@ export class AdminBrandComponent implements OnInit, OnDestroy {
     this.searchService.onSearch(this.brand, this.search);
   }
 
+  onDelete(id: number) {
+    this.brandService.deleteBrand(id);
+  }
+
   ngOnDestroy(): void {
     this.brandSubscription.unsubscribe();
   }

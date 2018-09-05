@@ -1,36 +1,43 @@
 import { Brand } from '../models/brand.model';
 import { Subject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { ParamService } from './param.service';
 
 @Injectable()
 
-export class BrandService implements OnInit
+export class BrandService
 {
     brand: Brand[] = [];
     brandSubject = new Subject<Brand[]>();
 
     httpOption = {
         headers: new HttpHeaders({
-            'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8',
+            'Content-Type' : 'application/json; charset=UTF-8',
             'credentials': 'include'
         })
     };
 
-    constructor(private http: HttpClient){
-        const brandType = {
-            id: 0,
-            name: 'Volkswagen',
-            logo: 'http://marque-voiture.com/wp-content/uploads/2015/10/logo-Volkswagen.png'
-        };
+    constructor(private http: HttpClient,
+                private paramService: ParamService){
 
-        for (let i = 0; i < 11; i++) {
-            brandType.id = i;
-            this.brand.push( new Brand(brandType) );
-        }
-    }
+        this.http.get(
+            this.paramService.apiUrl + 'brand/get'
+        ).subscribe(
+            response => {
+                if( response.status === 200 ){
+                    for( const data of response.data){
+                        this.brand.push(
+                            new Brand({
+                                id: data.id,
+                                name: data.name
+                            })
+                        );
+                    }
+                }
+            }
+        );
 
-    ngOnInit() {
     }
 
     emitBrand() {
@@ -44,14 +51,29 @@ export class BrandService implements OnInit
     }
 
     addBrand(brand: Brand) {
-        return this.http.post('http://localhost:5800/brand/add', brand, this.httpOption);
+
+        /* Envoi de la nouvelle marque au serveur */
+        this.http.post(
+            this.paramService.apiUrl + 'brand/add',
+            JSON.stringify(brand) ).subscribe(
+                response => brand.id = response.id
+            );
+
+        this.brand.push(brand);
+        this.emitBrand();
     }
 
-    uploadLogo(file: File) {
-        console.log(file);
+    deleteBrand(id: number) {
 
-        return this.http.post('http://localhost:5800/brand/add', file, this.httpOption);
+        this.http.get(
+            this.paramService.apiUrl + 'brand/delete/' + (+id),
+        ).subscribe(
+            response => {
+                const idDelete = response.id;
+                const brandIndex = this.brand.findIndex( brand => brand.id === idDelete );
+                this.brand.splice(brandIndex, 1);
+                this.emitBrand();
+            }
+        );
     }
-
-
 }

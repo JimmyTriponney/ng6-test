@@ -1,7 +1,5 @@
 <form [formGroup]="brandForm" (ngSubmit)="onSubmitForm()" class="row" enctype="multipart/form-data">
 
-  <div>{{ test?.toto }}</div>
-
   <div class="col-12">
     <h2>Adresse</h2>
   </div>
@@ -10,29 +8,9 @@
     <input type="text" class="form-control" placeholder="Nom de la marque" formControlName="name">
   </div>
 
-  <div class="form-group col-12">
-    <input type="text" class="form-control" placeholder="Lien du logo" formControlName="logo">
-  </div>
-
-
-
-  <div class="form-group col-12">
-    <input type="file" (change)="onChangeFile($event)"
-           class="form-control" accept="image/*">
-  </div>
-
-  <!--
-  <angular-file-uploader
-      [config]="afuConfig"
-      [resetUpload]=resetVar
-      (ApiResponse)="onUpload($event)">
-  </angular-file-uploader>
-  -->
-
-
   <div class="col-12 my-5">
     <div class="row">
-      <button type="submit" class="btn btn-primary col-4 m-auto" [disabled]="false && brandForm.invalid">Enregistrer</button>
+      <button type="submit" class="btn btn-primary col-4 m-auto" [disabled]="brandForm.invalid">Enregistrer</button>
     </div>
   </div>
   

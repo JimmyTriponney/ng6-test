@@ -24,11 +24,13 @@ import { LoaderDirective } from './loader.directive';
 import { AdminBrandComponent } from './tool-admin/admin-brand/admin-brand.component';
 import { BrandService } from './services/brand.service';
 import { AddBrandComponent } from './tool-admin/admin-brand/add-brand/add-brand.component';
+import { IndexComponent } from './index/index.component';
+import { ParamService } from './services/param.service';
 
 
 const appRoute: Routes = [
-  { path: '', component: AppComponent},
-  { path: 'test', component: AppComponent},
+  { path: '', component: IndexComponent},
+  { path: 'test', component: IndexComponent},
   { path: 'tool/admin/concession', component: AdminConcessionsComponent},
   { path: 'tool/admin/user', component: AdminUsersComponent},
   { path: 'tool/admin/brand', component: AdminBrandComponent},
@@ -53,7 +55,8 @@ const appRoute: Routes = [
     ViewUserComponent,
     LoaderDirective,
     AdminBrandComponent,
-    AddBrandComponent
+    AddBrandComponent,
+    IndexComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +72,8 @@ const appRoute: Routes = [
     ValidatorForm,
     UserService,
     BrandService,
-    SearchService
+    SearchService,
+    ParamService
   ],
   bootstrap: [AppComponent]
 })
